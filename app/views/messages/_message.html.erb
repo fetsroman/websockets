@@ -1,0 +1,8 @@
+<div class="card <%= 'me' if message.user_id == current_user.id %>">
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p><%= message.context %></p>
+      <footer class="blockquote-footer"><%= message.user.email %></footer>
+    </blockquote>
+  </div>
+</div>

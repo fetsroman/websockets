@@ -23,8 +23,9 @@ gem 'redis', '~> 4.0'
 gem 'mongoid', '~> 7.0.5'
 gem 'bootstrap', '~> 5.1.3'
 gem 'devise'
-gem "anycable-rails", "~> 1.1"
+gem "anycable-rails", "~> 1.1", group: 'production'
 gem "psych", "~> 3.0"
+gem 'sidekiq'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false

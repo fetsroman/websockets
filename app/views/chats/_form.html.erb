@@ -1,0 +1,22 @@
+<%= form_with(model: chat) do |form| %>
+  <% if chat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(chat.errors.count, "error") %> prohibited this chat from being saved:</h2>
+
+      <ul>
+        <% chat.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name, for: 'name_input' %>
+    <%= form.text_field :name, class: 'form-control', id: 'name_input' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Create New Chat', class: 'btn btn-success' %>
+  </div>
+<% end %>

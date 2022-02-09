@@ -33,4 +33,12 @@ class User
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
+
+  has_many :messages, dependent: :destroy
+
+  scope :except_current, -> (current_user_id) { ne(id: current_user_id) }
+
+  def online?
+    !Redis.new.get("user_#{self.id}_online").nil?
+  end
 end

@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container-fluid">
+  <h5 id="current-user" data-user-id="<%= current_user.id.to_s %>" data-user-email="<%= current_user.email %>">Hello <%= current_user.email %></h5>
+  <%= button_to "logout", destroy_user_session_path, method: :delete  %>
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'form', chat: Chat.new %>
+      <hr>
+      <h1>Chats</h1>
+      <ul class="list-group">
+        <% @chats.each do |chat| %>
+          <%= link_to chat_path(chat.id) do %>
+            <li class="list-group-item <%= "active-chat" if @chat == chat %>"><%= chat.name %></li>
+          <% end %>
+        <% end %>
+      </ul>
+      <hr>
+      <h1>Users</h1>
+      <ul class="list-group">
+        <% @users.each do |user| %>
+          <%= link_to chat_path(user.id) do %>
+            <li class="list-group-item "><%= user.email %> <span id="user-<%= user.id.to_s %>-dot" class="dot <%= 'active' if user.online? %>">•</span></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-md-9">
+      <% if @chat.present? %>
+        <h6 id="chat-id" data-chat-id="<%= @chat.id %>"><%= @chat.name %></h6>
+        <div id="messages">
+          <% @chat.messages.each do |message| %>
+            <%= render 'messages/message', message: message %>
+          <% end %>
+        </div>
+        <div id="typing-indicator"></div>
+        <%= render 'messages/form', message: Message.new, chat: @chat %>
+      <% else %>
+        <h5 class="text-center">Select chat to start chating!!))</h5>
+      <% end %>
+    </div>
+  </div>
+</div>
